@@ -5,7 +5,9 @@ import (
 	"os"
 
 	"github.com/amirnilofari/uptime-monitoring-backend/db"
+	"github.com/amirnilofari/uptime-monitoring-backend/routes"
 	"github.com/joho/godotenv"
+	"github.com/labstack/echo/v4"
 )
 
 func main() {
@@ -19,4 +21,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to initialize database: %v", err)
 	}
+
+	e := echo.New()
+
+	routes.PublicRoutes(e)
+
+	e.Logger.Fatal(e.Start(":8080"))
 }

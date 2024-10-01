@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/amirnilofari/uptime-monitoring-backend/db"
+	"github.com/amirnilofari/uptime-monitoring-backend/monitor"
 	"github.com/amirnilofari/uptime-monitoring-backend/routes"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -25,6 +26,9 @@ func main() {
 	e := echo.New()
 
 	routes.PublicRoutes(e)
+	routes.ProtectedRoutes(e)
+
+	go monitor.StartMonitoring()
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

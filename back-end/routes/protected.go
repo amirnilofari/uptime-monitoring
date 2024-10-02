@@ -7,7 +7,7 @@ import (
 )
 
 func ProtectedRoutes(router *echo.Echo) {
-	r := router.Group("/")
+	r := router.Group("")
 	r.Use(middlewares.JWTAuthMiddleware)
 	r.POST("/urls", handlers.AddURL)
 	r.GET("/urls", handlers.GetURLs)

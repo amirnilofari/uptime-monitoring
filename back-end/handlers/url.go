@@ -68,7 +68,7 @@ func DeleteURL(c echo.Context) error {
 	query := "DELETE FROM urls WHERE id=$1 AND user_id=$2"
 	res, err := db.DB.Exec(query, urlID, userID)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to delete url"})
+		return c.JSON(http.StatusInternalServerError, echo.Map{"error": "Failed to delete url" + err.Error()})
 	}
 
 	count, err := res.RowsAffected()
